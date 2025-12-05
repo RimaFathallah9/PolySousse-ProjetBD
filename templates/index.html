@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h1 class="display-4">Welcome</h1>
+        <p class="lead">to the OrganiByRima.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Total Members</div>
+            <div class="card-body">
+                <h5 class="card-title display-4">{{ member_count }}</h5>
+                <p class="card-text">Active members in the Organisation.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">Events Organized</div>
+            <div class="card-body">
+                <h5 class="card-title display-4">{{ event_count }}</h5>
+                <p class="card-text">Total events planned.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-header">Total Revenue</div>
+            <div class="card-body">
+                <h5 class="card-title display-4">${{ total_revenue }}</h5>
+                <p class="card-text">Collected from payments.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Quick Actions</h5>
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('members') }}" class="btn btn-outline-primary">Add New Member</a>
+                    <a href="{{ url_for('events') }}" class="btn btn-outline-success">Create Event</a>
+                    <a href="{{ url_for('attendance') }}" class="btn btn-outline-info">Mark Attendance</a>
+                </div>
+            </div>
+        </div>
+    </div>
+   <div class="status-popup">
+    <div class="card">
+        <div class="card-body p-3">
+            <h6 class="card-title m-0 mb-2">System Status</h6>
+            <p class="text-success m-0"><i class="bi bi-check-circle-fill"></i> Database Connected</p>
+            <p class="text-success m-0"><i class="bi bi-check-circle-fill"></i> System Active</p>
+        </div>
+    </div>
+</div>
+
+</div>
+{% endblock %}

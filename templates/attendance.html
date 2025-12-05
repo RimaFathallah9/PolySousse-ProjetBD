@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                Mark Attendance
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('attendance') }}" method="POST">
+                    <div class="mb-3">
+                        <label for="id_event" class="form-label">Event</label>
+                        <select class="form-select" id="id_event" name="id_event" required>
+                            <option value="" selected disabled>Select Event</option>
+                            {% for event in events %}
+                            <option value="{{ event.id_event }}">{{ event.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_member" class="form-label">Member</label>
+                        <select class="form-select" id="id_member" name="id_member" required>
+                            <option value="" selected disabled>Select Member</option>
+                            {% for member in members %}
+                            <option value="{{ member.id_member }}">{{ member.full_name }} ({{ member.class_name }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="present">Present</option>
+                            <option value="absent">Absent</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-info w-100 text-white">Record Attendance</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                Recent Attendance Records
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Event</th>
+                                <th>Member</th>
+                                <th>Status</th>
+                                <th>Recorded At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in attendance_records %}
+                            <tr>
+                                <td>{{ record.event_title }}</td>
+                                <td>{{ record.full_name }}</td>
+                                <td>
+                                    {% if record.status == 'present' %}
+                                    <span class="badge bg-success">Present</span>
+                                    {% else %}
+                                    <span class="badge bg-danger">Absent</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ record.recorded_at }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="4" class="text-center">No records found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

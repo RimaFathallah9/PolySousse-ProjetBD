@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                Record Payment
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('payments') }}" method="POST">
+                    <div class="mb-3">
+                        <label for="id_member" class="form-label">Member</label>
+                        <select class="form-select" id="id_member" name="id_member" required>
+                            <option value="" selected disabled>Select Member</option>
+                            {% for member in members %}
+                            <option value="{{ member.id_member }}">{{ member.full_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_event" class="form-label">Event</label>
+                        <select class="form-select" id="id_event" name="id_event" required>
+                            <option value="" selected disabled>Select Event</option>
+                            {% for event in events %}
+                            <option value="{{ event.id_event }}">{{ event.title }} (${{ event.price }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount ($)</label>
+                        <input type="number" step="0.01" class="form-control" id="amount" name="amount" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="payment_method" class="form-label">Payment Method</label>
+                        <select class="form-select" id="payment_method" name="payment_method">
+                            <option value="Cash">Cash</option>
+                            <option value="Card">Card</option>
+                            <option value="Transfer">Transfer</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-warning w-100">Save Payment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                Payment History
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Member</th>
+                                <th>Event</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for payment in payments %}
+                            <tr>
+                                <td>{{ payment.date_payment }}</td>
+                                <td>{{ payment.full_name }}</td>
+                                <td>{{ payment.event_title }}</td>
+                                <td>${{ payment.amount }}</td>
+                                <td>{{ payment.payment_method }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">No payments recorded.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
