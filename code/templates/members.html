@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="row">
+    {% if current_user.role == 'admin' %}
     <div class="col-md-4">
         <div class="card">
             <div class="card-header bg-primary text-white">
@@ -26,8 +26,9 @@
             </div>
         </div>
     </div>
+    {% endif %}
     
-    <div class="col-md-8">
+    <div class="{% if current_user.role == 'admin' %}col-md-8{% else %}col-md-12{% endif %}">
         <div class="card">
             <div class="card-header">
                 Member List
@@ -41,7 +42,9 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Class</th>
+                                {% if current_user.role == 'admin' %}
                                 <th>Actions</th>
+                                {% endif %}
                             </tr>
                         </thead>
                         <tbody>
@@ -51,9 +54,11 @@
                                 <td>{{ member.full_name }}</td>
                                 <td>{{ member.email }}</td>
                                 <td>{{ member.class_name }}</td>
+                                {% if current_user.role == 'admin' %}
                                 <td>
                                     <a href="{{ url_for('delete_member', id=member.id_member) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
                                 </td>
+                                {% endif %}
                             </tr>
                             {% else %}
                             <tr>

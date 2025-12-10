@@ -1,7 +1,7 @@
-# OrganiByRima - Club Management System
+# OrganiByG7 - Club Management System
 
 ## 1. Project Overview
-**OrganiByRima** is a comprehensive web-based application designed to streamline the management of school clubs and organizations. It provides a centralized platform for administrators to manage members, organize events, track attendance, and handle financial records.
+**OrganiByG7** is a comprehensive web-based application designed to streamline the management of school clubs and organizations. It provides a centralized platform for administrators to manage members, organize events, track attendance, and handle financial records.
 
 This project demonstrates the integration of a **Python (Flask)** backend with a **MySQL** relational database, utilizing **HTML/CSS/JavaScript** for a responsive and user-friendly frontend.
 
